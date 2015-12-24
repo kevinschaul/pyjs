@@ -5,8 +5,7 @@ class Lexer(object):
     Logic to create a lexicon analyzer
     """
     tokens = (
-        'DECIMAL',
-        'INTEGER',
+        'NUMBER',
         'STRING',
         'TEXT',
     )
@@ -18,18 +17,16 @@ class Lexer(object):
 
     def tokenize(self, data):
         self.lexer.input(data)
+        ret = []
         while True:
             token = self.lexer.token()
             if not token:
                 break
             print token
+            ret.append(token)
+        return ret
 
-    def t_INTEGER(self, t):
-        r'-?[0-9]+'
-        t.value = int(t.value)
-        return t
-
-    def t_DECIMAL(self, t):
+    def t_NUMBER(self, t):
         r'-?[0-9]+(?:\.[0-9]+)*'
         t.value = float(t.value)
         return t

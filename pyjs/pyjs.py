@@ -5,7 +5,9 @@ import sys
 
 import cli
 
+import interpreter
 import lexer
+import parser
 
 class PyJS(object):
     """
@@ -19,12 +21,20 @@ class PyJS(object):
         self.cli = cli.CLI()
         self.args = self.cli.parse_arguments(args)
         self.lexer = lexer.Lexer()
+        #self.parser = parser.Parser()
+        #self.interpreter = interpeter.Interpreter()
 
     def main(self):
         """
         TODO
         """
-        self.lexer.tokenize('"stuff" 23 007 1 0.234 -23')
+        text = '"stuff" 23 007 1 0.234 -23'
+        tokens = self.lexer.tokenize(text)
+        print(tokens)
+        #jstree = self.parser.parse(text, lexer=self.lexer)
+        #print(jstree)
+        #result = self.interpreter.interpret(jstree)
+        #print(result)
 
 def launch_new_instance():
     """
